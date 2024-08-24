@@ -1,15 +1,27 @@
-const express = require("express");
-const mongodb = require("mongodb").MongoClient;
-// We import the ObjectId class from mongodb
-const { MongoClient, ObjectId } = require("mongodb");
+const express = require('express');
+const mongoose = require("mongoose");
+const { MongoClient } = require('mongodb');
+const routes = require("./routes")
 
 const app = express();
-const port = 3001;
+const PORT = process.env.PORT || 3000;
 
-const connectionStringURI = `mongodb://127.0.0.1:27017`;
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
+app.use(express.static('public'));
+app.use(routes);
 
-const client = new MongoClient(connectionStringURI);
 
-let db;
+const connectionStringURI = `mongodb://localhost/`;
+const dbName = 'socialNetwork';
 
-const dbName = "";
+
+mongoose.connect(process.env.MONGODB_URI || connectionStringURI+dbName, {
+    useFindAndModify: false,
+    useNewUrlParser: true,
+    userUnifiedTopology: true
+});
+
+mongoose.set('debug', true)
+
+app.listen(PORT, ()=> console.log(`Server connected to localhost:${PORT}`));
