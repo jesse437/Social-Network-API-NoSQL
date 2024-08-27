@@ -2,6 +2,7 @@ const user = require("./thoughts");
 const express = require("express");
 const mongoose = require("mongooose");
 const { thoughts } = require("models");
+const thoughts = ('../config/controllers');
 
 
 app.get('/api/thoughts', async (req, res) => {

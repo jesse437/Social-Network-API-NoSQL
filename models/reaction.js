@@ -30,3 +30,5 @@ const Reaction = mongoose.model("Reaction", reactionSchema);
 const handleError = (err) => console.error(err);
 
 module.exports = Reaction;
+
+
