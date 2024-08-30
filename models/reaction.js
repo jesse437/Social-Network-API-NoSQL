@@ -26,9 +26,9 @@ const reactionSchema = new mongoose.Schema(
   }
 );
 
-const Reaction = mongoose.model("Reaction", reactionSchema);
-const handleError = (err) => console.error(err);
+// const Reaction = mongoose.model("Reaction", reactionSchema);
+// const handleError = (err) => console.error(err);
 
-module.exports = Reaction;
+module.exports = reactionSchema;
 
 

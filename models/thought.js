@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const moment = require("moment");
-const reactionSchema = require("reaction");
+const reactionSchema = require("./Reaction");
 
 const thoughtSchema = new mongoose.Schema(
   {
@@ -26,7 +26,7 @@ const thoughtSchema = new mongoose.Schema(
 thoughtSchema.virtual("reactionCount").get(function () {
   return this.reactions.length;
 });
-const Thought = mongoose.model("Thought", thoughtSchema);
+const Thought = mongoose.model("thought", thoughtSchema);
 const handleError = (err) => console.error(err);
 
 module.exports = Thought;
