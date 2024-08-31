@@ -71,6 +71,8 @@ module.exports = {
     },
     
 
+
+    
     createReaction(req, res) {
         Reaction.create(req.body)
                 .then((reaction) => res.json(reaction))
@@ -81,6 +83,7 @@ module.exports = {
     },
 
 
+    // delete route for reaction
     deleteReaction(req, res) {
         Reaction.findOneAndDelete({ _id: req.params.reactionId })
                 .then(reaction => {
