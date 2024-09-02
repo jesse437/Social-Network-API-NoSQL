@@ -33,6 +33,8 @@ https://github.com/jesse437/Social-Network-API-NoSQL
 
 # 5. Visuals
 
+![alt text](<Screenshot 2024-09-02 at 2.55.37 PM.png>)
+
 # 6. Collaborators
 
 ```md
