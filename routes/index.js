@@ -1,11 +1,14 @@
-const router = require("express").Router();
-const apiRoutes = require("./api");
+const router = require('express').Router();
+const apiRoutes = require('./api');
 
 
-router.use("/api", apiRoutes);
+//any routes defined in apiRoutes will be prefixed with /api
+router.use('/api', apiRoutes);
+
 
 router.use((req, res) => {
-  return res.status(404).send("Wrong route!");
+  return res.send('Wrong route!');
 });
+
 
 module.exports = router;

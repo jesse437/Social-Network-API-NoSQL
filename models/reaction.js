@@ -1,34 +1,39 @@
-const mongoose = require("mongoose");
-const moment = require("moment");
+const { Schema, model } = require('mongoose');
 
-const reactionSchema = new mongoose.Schema(
-  {
-    reactionId: {
-      type: mongoose.Schema.Types.ObjectId,
-      default: () => new mongoose.Types.ObjectId(),
-    },
-
-    reactionBody: { type: String, required: true, maxlength: 280 },
-    username: { type: String, required: true },
-    createdAt: {
-      type: Date,
-      default: Date.now,
-      get: (createdAtVal) =>
-        moment(createdAtVal).format("MMM DD, YYYY [at] hh:mm a"),
-    },
-  },
-  {
-    toJSON: {
-      virtuals: true,
-      getters: true,
-    },
-    id: false,
-  }
+//schema for what makes up a reaction
+const reactionSchema = new Schema(
+    {
+        reactionId: {
+            type: Schema.Types.ObjectId,
+        },
+        reactionBody: {
+            type: String,
+            required: true,
+            minlength: 1,
+            maxlength: 280,
+        },
+        username: {
+            type: String,
+            required: true,
+            ref: 'User',
+        },
+        createdAt: {
+            type: Date,
+            default: Date.now,
+            get: timestamp => dateFormat(timestamp)
+        },
+    }
 );
 
-// const Reaction = mongoose.model("Reaction", reactionSchema);
-// const handleError = (err) => console.error(err);
-
-module.exports = reactionSchema;
 
 
+function dateFormat(timestamp) {
+    const date = new Date(timestamp);
+    return `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
+}
+
+
+
+const Reaction = model('reaction', reactionSchema);
+
+module.exports = Reaction;

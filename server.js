@@ -1,20 +1,30 @@
-const express = require("express");
-const mongoose = require("mongoose");
-const routes = require("./routes");
-const db = require("./config/connection");
+const express = require('express');
+const db = require('./config/connection');
+const routes = require('./routes');
 
+
+//sets up the express app
 const app = express();
-const PORT = process.env.PORT || 3001;
+const port = process.env.PORT || 3001;
 
-app.use(express.json());
+
+//middleware to handle json and url-encoded (form) data
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static("public"));
+app.use(express.json());
+
+
+//middleware for handling routes
 app.use(routes);
 
-db.once("open", () => {
-  app.listen(PORT, () => {
-    console.log(`Server connected to localhost:${PORT}`);
-  });
-});
 
-mongoose.set("debug", true);
+//connects to database and then starts listening
+db.once('open', () => {
+    app.listen(port, () => {
+      console.log(`API server running on port ${port}!`);
+    });
+  });
+
+
+
+
+
